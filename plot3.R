@@ -13,7 +13,7 @@ head(total_emission_type, n=20)
 
 plot3 <- ggplot(data=total_emission_type, aes(x=year, y=total_type, col=type))+
   geom_line(color = 'blue', size = 1, alpha = 1/3)+
-  facet_grid(.~type)
+  facet_grid(.~type)+
 labs(title = "PM2.5 Emissions in Baltimore City, by type", y = "Total emissions", x = "year")
 
 #observed decrease in the following types: nonpoint, non-road and on-road. Increase in type "point"
