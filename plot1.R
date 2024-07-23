@@ -16,21 +16,28 @@ mean(is.na(NEI$Emissions))
 View(SCC)
 
 #question 1
-plot(NEI$Emissions)
 
-total_emissions_year <- NEI |> 
+tot.emissions.year <- NEI |> 
   group_by(year) |> 
   summarize(total_emissions = sum(Emissions, na.rm=TRUE))
 
-head(total_emissions_year)
+head(tot.emissions.year)
 
 #emission dropped from 7.3 ton to 3.5 ton.
 
+png (filename = "plot1.png", width=800, height = 600)
 
-plot1 <- ggplot(data=total_emissions_year, aes(x=year, y=total_emissions))+
-  geom_point(pch=0, size=5, col='blue')+
-  labs(title = "Total Annual Emissions in the US by Year", y = "Total Annual Emissions [Tons]", x = "Year")+
-  theme_classic()
+#creating the plot1
+with(tot.emissions.year, # plot data 
+     plot(x = year, 
+          y = total_emissions, 
+          ylab = "Total Annual Emissions [Tons]", 
+          xlab = "Year",
+          main = "Total Annual Emissions in the US by Year",
+          cex = 2,
+          pch = 2,
+          col = "red",
+          lwd = 3))
 
-#saving the plot1
-ggsave(filename = "plot1.png", plot = plot1, width = 8, height = 6, units = "in", dpi = 300)
+#closing the PNG device
+dev.off()
